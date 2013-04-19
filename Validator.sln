@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validator", "Validator\Validator.csproj", "{393B2210-982A-4062-A089-090D80AF8251}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validator.Test", "Validator.Test\Validator.Test.csproj", "{C7FD9BCA-25A6-47EF-AD90-D7A1C406ED34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{393B2210-982A-4062-A089-090D80AF8251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{393B2210-982A-4062-A089-090D80AF8251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{393B2210-982A-4062-A089-090D80AF8251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FD9BCA-25A6-47EF-AD90-D7A1C406ED34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FD9BCA-25A6-47EF-AD90-D7A1C406ED34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FD9BCA-25A6-47EF-AD90-D7A1C406ED34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FD9BCA-25A6-47EF-AD90-D7A1C406ED34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
