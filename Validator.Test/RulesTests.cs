@@ -16,7 +16,7 @@ namespace UnitTestProject1
         public void RuleIsValid_ShouldBeTrue()
         {
             // ARRANGE
-            var rule = new Rule<Entity2,string>(e => e.StringProperty2, v => v != "some string");
+            var rule = new Rule<Entity2>(e => e.StringProperty2 != "some string");
             var entity = new Entity2{StringProperty2 = "value"};
 
             // ACT
@@ -32,7 +32,7 @@ namespace UnitTestProject1
         public void RuleIsValid_ShouldBeFalse()
         {
             // ARRANGE
-            var rule = new Rule<Entity, string>(e => e.StringProperty, v => v != "some string");
+            var rule = new Rule<Entity>(e => e.StringProperty != "some string");
             var entity = new Entity { StringProperty = "some string" };
 
             // ACT
@@ -42,13 +42,13 @@ namespace UnitTestProject1
             Assert.IsFalse(condition);
         }
 
-        [TestCategory("Required")]
+        [TestCategory("Required Instance")]
         [TestProperty("Value", "object")]
         [TestMethod]
-        public void RequiredRuleIsValid_ShouldBeTrue()
+        public void RequiredInstanceRuleIsValid_ShouldBeTrue()
         {
             // ARRANGE
-            var rule = new RequiredRule<Entity, object>(e => e.ObjectProperty);
+            var rule = new RequiredInstanceRule<Entity, object>(e => e.ObjectProperty);
             var entity = new Entity { ObjectProperty = new object()};
 
             // ACT
@@ -58,13 +58,13 @@ namespace UnitTestProject1
             Assert.IsTrue(condition);
         }
 
-        [TestCategory("Required")]
+        [TestCategory("Required Instance")]
         [TestProperty("Value", "object")]
         [TestMethod]
-        public void RequiredRuleIsValid_ShouldBeFalse()
+        public void RequiredInstanceRuleIsValid_ShouldBeFalse()
         {
             // ARRANGE
-            var rule = new RequiredRule<Entity, object>(e => e.ObjectProperty);
+            var rule = new RequiredInstanceRule<Entity, object>(e => e.ObjectProperty);
             var entity = new Entity();
 
             // ACT
@@ -74,7 +74,7 @@ namespace UnitTestProject1
             Assert.IsFalse(condition);
         }
 
-        [TestCategory("RequiredString")]
+        [TestCategory("Required String")]
         [TestProperty("Value", "string")]
         [TestMethod]
         public void RequiredStringRuleIsValid_ShouldBeTrue()
@@ -90,7 +90,7 @@ namespace UnitTestProject1
             Assert.IsTrue(condition);
         }
 
-        [TestCategory("Required")]
+        [TestCategory("Required String")]
         [TestProperty("Value", "string")]
         [TestMethod]
         public void RequiredStringRuleIsValid_ShouldBeFalse()

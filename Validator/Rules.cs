@@ -7,54 +7,59 @@ namespace Validator
 {
     using System.Linq.Expressions;
 
-    public abstract class RuleBase<T,TProp>
+    public abstract class RuleBase<TEntity>
     {
-        protected Expression<Func<T, TProp>> projection;
-
-        protected RuleBase(Expression<Func<T, TProp>> p)
-        {
-            projection = p;
-        }
-
-        public bool IsValid(T entity)
-        {
-            return Validate(projection.Compile()(entity));
-        }
-
-        protected abstract bool Validate(TProp value);
+        public abstract bool IsValid(TEntity entity);
     }
-    
-    public class Rule<T, TProp> : RuleBase<T, TProp>
-    {
-        protected Func<TProp, bool> rule;
 
-        public Rule(Expression<Func<T, TProp>> p, Func<TProp, bool> r)
-            : base(p)
+    public class Rule<TEntity> : RuleBase<TEntity>
+    {
+        protected Func<TEntity, bool> rule;
+
+        public Rule(Func<TEntity, bool> r)
         {
             rule = r;
         }
 
-        protected override bool Validate(TProp value)
+        public override bool IsValid(TEntity entity)
         {
-            return rule(value);
+            return rule(entity);
         }
     }
 
-    public class RequiredRule<T, TValue> :RuleBase<T, TValue>
-        where TValue : class 
+    public abstract class RequiredRule<TEntity, TValue> : RuleBase<TEntity>
     {
-        public RequiredRule(Expression<Func<T, TValue>> p)
+        private readonly Expression<Func<TEntity, TValue>> projection;
+
+        protected RequiredRule(Expression<Func<TEntity, TValue>> p)
+        {
+            projection = p;
+        }
+
+        public override bool IsValid(TEntity value)
+        {
+            return this.Validate(projection.Compile()(value));
+        }
+
+        protected abstract bool Validate(TValue value);
+
+    }
+
+    public class RequiredInstanceRule<TEntity, TInstance> : RequiredRule<TEntity, TInstance>
+        where TInstance : class
+    {
+        public RequiredInstanceRule(Expression<Func<TEntity, TInstance>> p)
             : base(p)
         {
         }
 
-        protected override bool Validate(TValue value)
+        protected override bool Validate(TInstance value)
         {
             return value != null;
         }
     }
 
-    public class RequiredStringRule<T>: RuleBase<T,string>
+    public class RequiredStringRule<T> : RequiredRule<T, string>
     {
         public RequiredStringRule(Expression<Func<T, string>> p)
             : base(p)
