@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestValidation;
 
 namespace UnitTestProject1
 {
     using Validator;
+    using Validator.Rules;
+    using Validator.Test;
 
     [TestClass]
     public class RulesTests
     {
         [TestCategory("Rule")]
-        [TestProperty("Value", "string")]
         [TestMethod]
         public void RuleIsValid_ShouldBeTrue()
         {
@@ -27,7 +27,6 @@ namespace UnitTestProject1
         }
 
         [TestCategory("Rule")]
-        [TestProperty("Value", "string")]
         [TestMethod]
         public void RuleIsValid_ShouldBeFalse()
         {
@@ -43,7 +42,6 @@ namespace UnitTestProject1
         }
 
         [TestCategory("Required Instance")]
-        [TestProperty("Value", "object")]
         [TestMethod]
         public void RequiredInstanceRuleIsValid_ShouldBeTrue()
         {
@@ -59,7 +57,6 @@ namespace UnitTestProject1
         }
 
         [TestCategory("Required Instance")]
-        [TestProperty("Value", "object")]
         [TestMethod]
         public void RequiredInstanceRuleIsValid_ShouldBeFalse()
         {
@@ -75,7 +72,6 @@ namespace UnitTestProject1
         }
 
         [TestCategory("Required String")]
-        [TestProperty("Value", "string")]
         [TestMethod]
         public void RequiredStringRuleIsValid_ShouldBeTrue()
         {
@@ -91,7 +87,6 @@ namespace UnitTestProject1
         }
 
         [TestCategory("Required String")]
-        [TestProperty("Value", "string")]
         [TestMethod]
         public void RequiredStringRuleIsValid_ShouldBeFalse()
         {
@@ -105,14 +100,13 @@ namespace UnitTestProject1
             // ASSERT
             Assert.IsFalse(condition);
         }
-/*
-        [TestCategory("Required")]
-        [TestProperty("Value", "int")]
+
+        [TestCategory("Required int")]
         [TestMethod]
         public void RequiredIntRuleIsValid_ShouldBeTrue()
         {
             // ARRANGE
-            var rule = new RequiredRule<int>(e => e.IntProperty);
+            var rule = new RequiredIntRule<Entity>(e => e.IntProperty);
             var entity = new Entity{IntProperty = 1};
 
             // ACT
@@ -122,13 +116,12 @@ namespace UnitTestProject1
             Assert.IsTrue(condition);
         }
 
-        [TestCategory("Required")]
-        [TestProperty("Value", "int")]
+        [TestCategory("Required int")]
         [TestMethod]
         public void RequiredIntRuleIsValid_ShouldBeFalse()
         {
             // ARRANGE
-            var rule = new RequiredRule<int>(e => e.IntProperty);
+            var rule = new RequiredIntRule<Entity>(e => e.IntProperty);
             var entity = new Entity();
 
             // ACT
@@ -137,6 +130,6 @@ namespace UnitTestProject1
             // ASSERT
             Assert.IsFalse(condition);
         }
-*/
+
     }
 }
