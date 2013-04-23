@@ -57,6 +57,9 @@
     <Compile Include="Entity2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RulesTests.cs" />
+    <Compile Include="RuleValidatorTest.cs" />
+    <Compile Include="IValidatableTest.cs" />
+    <Compile Include="ValidatorsTableTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Validator\Validator.csproj">
